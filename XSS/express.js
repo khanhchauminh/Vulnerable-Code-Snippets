@@ -9,7 +9,7 @@ function escapeHtml(str)
         '<': '&lt;',
         '>': '&gt;',
         '"': '&quot;',
-        "'": '&#039;'
+        "'": '&#039;' 
     };
     return str.replace(/[&<>"']/g, function(m) {return map[m];});
 }
