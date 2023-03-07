@@ -27,7 +27,7 @@ $data = fread($handle, 8192);
 if (strlen($data) == 0) {
 break;
 }
-echo($data);
+echo(htmlspecialchars($data));
 } while (true);
 
 fclose($handle);
