@@ -1,6 +1,18 @@
 const express = require('express');
 const router = express.Router()
 
+function escapeHtml(str)
+{
+    var map =
+    {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+    };
+    return str.replace(/[&<>"']/g, function(m) {return map[m];});
+}
 
 router.post("/list-users", (req, res) => { 
     var obj = req.body.users;
@@ -12,7 +24,7 @@ router.post("/list-users", (req, res) => {
     } 
 
     //doing something with the code
-    res.send(someArr.join(','));
+    res.send(escapeHtml(someArr.join(',')));
 });
 
 
