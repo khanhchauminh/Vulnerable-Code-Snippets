@@ -29,12 +29,25 @@ router.get('/run', (req,res) => {
    runMe(cmd,res)
 });
 
+function escapeHtml(str)
+{
+    var map =
+    {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+    };
+    return str.replace(/[&<>"']/g, function(m) {return map[m];});
+}
+
 function runMe(cmd,res){
 //    return spawn(cmd);
 
     const cmdRunning = spawn(cmd, []);
     cmdRunning.on('close', (code) => {
-        res.send(`child process exited with code ${code}`);
+        res.send(`child process exited with code` + escapeHtml(${code}));
     });
 }
 
